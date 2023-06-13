@@ -19,6 +19,15 @@
 
                 {{-- for authenticated users --}}
                 @auth
+
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route("category.create") }}">Create Category</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route("category.index") }}">Category Lists</a>
+                </li>
+
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route("article.create") }}">Create Article</a>
                 </li>

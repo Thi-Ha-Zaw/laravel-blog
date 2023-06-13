@@ -23,6 +23,7 @@ class ArticleController extends Controller
             $sortKey = request()->title ?? "asc";
             $query->orderBy("name",$sortKey);
         })
+        ->latest("id")
         ->paginate(7)->withQueryString();
 
         return view("article.index",compact("articles"));
@@ -45,6 +46,7 @@ class ArticleController extends Controller
         $article = Article::create([
             "title" => $request->title,
             "description" => $request->description,
+            "category_id" => $request->category,
             "user_id" => Auth::id()
         ]);
         return redirect()->route("article.index")->with("message",$article->title ."is created");
@@ -71,7 +73,13 @@ class ArticleController extends Controller
      */
     public function update(UpdateArticleRequest $request, Article $article)
     {
-        //
+        $article->update([
+            "title" => $request->title,
+            "category_id" => $request->category,
+            "description" => $request->description
+        ]);
+
+        return redirect()->route("article.index");
     }
 
     /**
@@ -79,6 +87,8 @@ class ArticleController extends Controller
      */
     public function destroy(Article $article)
     {
-        //
+
+        $article->delete();
+        return redirect()->back();
     }
 }

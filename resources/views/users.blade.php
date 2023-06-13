@@ -4,7 +4,7 @@
     <div class=" container">
         <div class="row justify-content-center mt-5">
             <div class="col-8">
-                <h1 class=" mb-5">Article Lists</h1>
+                <h1 class=" mb-5">User Lists</h1>
                 <table class=" table">
                     <thead>
                         <tr>
@@ -55,6 +55,9 @@
                         @endforelse
                     </tbody>
                 </table>
+                <div>
+                    {{$users->onEachSide(1)->links()}}
+                </div>
             </div>
         </div>
     </div>

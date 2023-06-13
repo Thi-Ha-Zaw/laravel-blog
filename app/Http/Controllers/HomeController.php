@@ -37,6 +37,7 @@ class HomeController extends Controller
             $sortKey = request()->title ?? "asc";
             $query->orderBy("name",$sortKey);
         })
+        ->latest("id")
         ->paginate(7)->withQueryString();
         return view("users",compact('users'));
     }

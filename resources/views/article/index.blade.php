@@ -2,15 +2,17 @@
 
 @section('content')
     <div class=" container">
-        <div class="row justify-content-center mt-5">
-            <div class="col-8">
-                <h1 class=" mb-5">Article Lists</h1>
+        <div class="row justify-content-center mt-3">
+            <div class="col-10">
+                <h1 class=" mb-4">Article Lists</h1>
+                <a href="{{route("article.create")}}" class=" btn btn-dark mb-4">Create</a>
                 <table class=" table">
                     <thead>
                         <tr>
                             <th>#</th>
-                            <th>Title</th>
-                            <th>user_id</th>
+                            <th>Article</th>
+                            <th>Category</th>
+                            <th>Owner</th>
                             <th>Control</th>
                             <th>Updated_at</th>
                             <th>Created_at</th>
@@ -27,6 +29,7 @@
                                         {{ Str::limit($article->description, 50, '...') }}
                                     </span>
                                 </td>
+                                <td>{{$article->category_id}}</td>
                                 <td>{{ $article->user_id }}</td>
                                 <td>
                                     <div class=" btn-group btn-group-sm">
@@ -36,12 +39,11 @@
                                         <a class=" btn btn-outline-dark" href="{{ route('article.edit', $article->id) }}">
                                             <i class=" bi bi-pencil"></i>
                                         </a>
-                                        <a form="articleDelForm{{ $article->id }}" class=" btn btn-outline-dark">
+                                        <button type="submit" form="articleDelForm{{ $article->id }}" class=" btn btn-outline-dark">
                                             <i class=" bi bi-trash3"></i>
-                                        </a>
+                                        </button>
                                     </div>
-                                    <form id="articleDelForm{{ $article->id }}"
-                                        action="{{ route('article.destroy', $article->id) }}" method="POST">
+                                    <form id="articleDelForm{{ $article->id }}" method="post" action="{{route("article.destroy",$article->id)}}">
                                         @csrf
                                         @method('delete')
                                     </form>
@@ -59,6 +61,9 @@
                         @endforelse
                     </tbody>
                 </table>
+                <div>
+                    {{$articles->onEachSide(1)->links()}}
+                </div>
             </div>
         </div>
     </div>
