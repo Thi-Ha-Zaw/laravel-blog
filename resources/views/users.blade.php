@@ -3,7 +3,7 @@
 @section('content')
     <div class=" container">
         <div class="row justify-content-center mt-5">
-            <div class="col-8">
+            <div class="col-10">
                 <h1 class=" mb-5">User Lists</h1>
                 <table class=" table">
                     <thead>
@@ -11,6 +11,8 @@
                             <th>#</th>
                             <th>Name</th>
                             <th>Email</th>
+                            <th>Category Count</th>
+                            <th>Article Count</th>
                             <th>Control</th>
                             <th>Updated_at</th>
                             <th>Created_at</th>
@@ -24,6 +26,12 @@
                                     {{ $user->name }}
                                 </td>
                                 <td>{{ $user->email }}</td>
+                                <td>
+                                    {{$user->categories->count()}}
+                                </td>
+                                <td>
+                                    {{$user->articles->count()}}
+                                </td>
                                 <td>
                                     {{-- <div class=" btn-group btn-group-sm">
                                         <a class=" btn btn-outline-dark" href="{{ route('article.show', $user->id) }}">

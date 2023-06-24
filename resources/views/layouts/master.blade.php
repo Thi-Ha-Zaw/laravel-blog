@@ -20,9 +20,20 @@
     <div id="app">
        @include("layouts.nav")
 
-        <main class="py-4">
-            @yield('content')
-        </main>
+
+
+            <div class=" container">
+                <div class="row gx-5">
+                    <div class="col-9 mt-4">
+                        <main class="py-4 ">
+                            @yield('content')
+                        </main>
+                    </div>
+                    <div class="col-3 mt-5">
+                        @include("layouts.right-sidebar")
+                    </div>
+                </div>
+            </div>
 
     </div>
 </body>

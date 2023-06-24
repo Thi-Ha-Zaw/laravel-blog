@@ -5,14 +5,16 @@
         <div class="row justify-content-center mt-3">
             <div class="col-10">
                 <h1 class=" mb-4">Article Lists</h1>
-                <a href="{{route("article.create")}}" class=" btn btn-dark mb-4">Create</a>
+                <a href="{{ route('article.create') }}" class=" btn btn-dark mb-4">Create</a>
                 <table class=" table">
                     <thead>
                         <tr>
                             <th>#</th>
                             <th>Article</th>
                             <th>Category</th>
-                            <th>Owner</th>
+                            @can('admin-only')
+                                <th>Owner</th>
+                            @endcan
                             <th>Control</th>
                             <th>Updated_at</th>
                             <th>Created_at</th>
@@ -29,27 +31,54 @@
                                         {{ Str::limit($article->description, 50, '...') }}
                                     </span>
                                 </td>
-                                <td>{{$article->category_id}}</td>
-                                <td>{{ $article->user_id }}</td>
+                                <td>{{ $article->category->title ?? "Unknown" }}</td>
+                                @can("admin-only")
+                                    <td>{{ $article->user->name ?? "Unknown" }}</td>
+                                @endcan
                                 <td>
                                     <div class=" btn-group btn-group-sm">
                                         <a class=" btn btn-outline-dark" href="{{ route('article.show', $article->id) }}">
                                             <i class=" bi bi-info"></i>
                                         </a>
-                                        <a class=" btn btn-outline-dark" href="{{ route('article.edit', $article->id) }}">
-                                            <i class=" bi bi-pencil"></i>
-                                        </a>
-                                        <button type="submit" form="articleDelForm{{ $article->id }}" class=" btn btn-outline-dark">
-                                            <i class=" bi bi-trash3"></i>
-                                        </button>
+                                        @can('article-update', $article)
+                                            <a class=" btn btn-outline-dark" href="{{ route('article.edit', $article->id) }}">
+                                                <i class=" bi bi-pencil"></i>
+                                            </a>
+                                        @endcan
+                                        @can('article-delete', $article)
+                                            <button type="submit" form="articleDelForm{{ $article->id }}"
+                                                class=" btn btn-outline-dark">
+                                                <i class=" bi bi-trash3"></i>
+                                            </button>
+                                        @endcan
+
                                     </div>
-                                    <form id="articleDelForm{{ $article->id }}" method="post" action="{{route("article.destroy",$article->id)}}">
+                                    <form id="articleDelForm{{ $article->id }}" method="post"
+                                        action="{{ route('article.destroy', $article->id) }}">
                                         @csrf
                                         @method('delete')
                                     </form>
                                 </td>
-                                <td>{{ $article->updated_at->diffForHumans() }}</td>
-                                <td>{{ $article->created_at->diffForHumans() }}</td>
+                                <td>
+                                    <p class=" mb-0 small">
+                                        <i class=" bi bi-clock"></i>
+                                        {{ $article->updated_at->format("h:i a") }}
+                                    </p>
+                                    <p class=" mb-0 small">
+                                        <i class=" bi bi-calendar"></i>
+                                        {{ $article->updated_at->format("d M Y") }}
+                                    </p>
+                                </td>
+                                <td>
+                                    <p class=" mb-0 small">
+                                        <i class=" bi bi-clock"></i>
+                                        {{ $article->created_at->format("h:i a") }}
+                                    </p>
+                                    <p class=" mb-0 small">
+                                        <i class=" bi bi-calendar"></i>
+                                        {{ $article->created_at->format("d M Y") }}
+                                    </p>
+                                </td>
                             </tr>
                         @empty
                             <tr class=" text-center">
@@ -62,7 +91,7 @@
                     </tbody>
                 </table>
                 <div>
-                    {{$articles->onEachSide(1)->links()}}
+                    {{ $articles->onEachSide(1)->links() }}
                 </div>
             </div>
         </div>

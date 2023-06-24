@@ -5,7 +5,7 @@
         <div class="row justify-content-center mt-5">
             <div class="col-8">
                 <h1 class=" mb-4">Category Lists</h1>
-                <a href="{{route("category.create")}}" class=" btn btn-dark mb-4">Create</a>
+                <a href="{{ route('category.create') }}" class=" btn btn-dark mb-4">Create</a>
                 <table class=" table">
                     <thead>
                         <tr>
@@ -24,18 +24,23 @@
                                 <td>
                                     {{ $category->title }}
                                 </td>
-                                <td>{{ $category->user_id }}</td>
+                                <td>{{ $category->user->name}}</td>
                                 <td>
                                     <div class=" btn-group btn-group-sm">
-
-                                        <a class=" btn btn-outline-dark" href="{{ route('category.edit', $category->id) }}">
-                                            <i class=" bi bi-pencil"></i>
-                                        </a>
-                                        <button type="submit" form="categoryDelForm{{ $category->id }}" class=" btn btn-outline-dark">
-                                            <i class=" bi bi-trash3"></i>
-                                        </button>
+                                        @can("update",$category)
+                                            <a class=" btn btn-outline-dark" href="{{ route('category.edit', $category->id) }}">
+                                                <i class=" bi bi-pencil"></i>
+                                            </a>
+                                        @endcan
+                                        @can("delete",$category)
+                                            <button type="submit" form="categoryDelForm{{ $category->id }}"
+                                                class=" btn btn-outline-dark">
+                                                <i class=" bi bi-trash3"></i>
+                                            </button>
+                                        @endcan
                                     </div>
-                                    <form id="categoryDelForm{{ $category->id }}" method="post" action="{{route("category.destroy",$category->id)}}">
+                                    <form id="categoryDelForm{{ $category->id }}" method="post"
+                                        action="{{ route('category.destroy', $category->id) }}">
                                         @csrf
                                         @method('delete')
                                     </form>
@@ -47,7 +52,7 @@
                             <tr class=" text-center">
                                 <td colspan="6">
                                     <h3>There is no categoris</h3>
-                                    <a href="{{ route("category.create") }}" class=" btn btn-dark">Create New</a>
+                                    <a href="{{ route('category.create') }}" class=" btn btn-dark">Create New</a>
                                 </td>
                             </tr>
                         @endforelse

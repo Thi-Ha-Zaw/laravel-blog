@@ -5,7 +5,11 @@ namespace App\Http\Controllers;
 use App\Models\Article;
 use App\Http\Requests\StoreArticleRequest;
 use App\Http\Requests\UpdateArticleRequest;
+use Illuminate\Contracts\Database\Eloquent\Builder;
+// use Illuminate\Auth\Access\Gate;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Str;
 
 class ArticleController extends Controller
 {
@@ -14,19 +18,24 @@ class ArticleController extends Controller
      */
     public function index()
     {
-        $articles = Article::when(request()->has("keyword"),function($query){
-            $keyword = request()->keyword;
-            $query->where("title","like","%".$keyword."%");
-            $query->orWhere("description","like","%".$keyword."%");
+        $articles = Article::when(request()->has("keyword"), function ($query) {
+            $query->where(function (Builder $builder) {
+                $keyword = request()->keyword;
+                $builder->where("title", "like", "%" . $keyword . "%");
+                $builder->orWhere("description", "like", "%" . $keyword . "%");
+            });
         })
-        ->when(request()->has("title"),function($query){
-            $sortKey = request()->title ?? "asc";
-            $query->orderBy("name",$sortKey);
-        })
-        ->latest("id")
-        ->paginate(7)->withQueryString();
+            ->when(Auth::user()->role === "user", function ($query) {
+                $query->where("user_id", Auth::id());
+            })
+            ->when(request()->has("title"), function ($query) {
+                $sortKey = request()->title ?? "asc";
+                $query->orderBy("name", $sortKey);
+            })
+            ->latest("id")
+            ->paginate(7)->withQueryString();
 
-        return view("article.index",compact("articles"));
+        return view("article.index", compact("articles"));
     }
 
     /**
@@ -45,11 +54,13 @@ class ArticleController extends Controller
 
         $article = Article::create([
             "title" => $request->title,
+            "slug" => Str::slug($request->title),
             "description" => $request->description,
+            "excert" => Str::words($request->description, 50, '...'),
             "category_id" => $request->category,
             "user_id" => Auth::id()
         ]);
-        return redirect()->route("article.index")->with("message",$article->title ."is created");
+        return redirect()->route("article.index")->with("message", $article->title . "is created");
     }
 
     /**
@@ -57,7 +68,7 @@ class ArticleController extends Controller
      */
     public function show(Article $article)
     {
-        return view("article.show",compact('article'));
+        return view("article.show", compact('article'));
     }
 
     /**
@@ -65,7 +76,8 @@ class ArticleController extends Controller
      */
     public function edit(Article $article)
     {
-        return view("article.edit",compact('article'));
+        Gate::authorize("article-update", $article);
+        return view("article.edit", compact('article'));
     }
 
     /**
@@ -73,10 +85,15 @@ class ArticleController extends Controller
      */
     public function update(UpdateArticleRequest $request, Article $article)
     {
+
+        Gate::authorize("article-update", $article);
+
         $article->update([
             "title" => $request->title,
             "category_id" => $request->category,
-            "description" => $request->description
+            "slug" => Str::slug($request->title),
+            "description" => $request->description,
+            "excert" => Str::words($request->description, 50, '...')
         ]);
 
         return redirect()->route("article.index");
@@ -87,6 +104,8 @@ class ArticleController extends Controller
      */
     public function destroy(Article $article)
     {
+
+        Gate::authorize("article-delete", $article);
 
         $article->delete();
         return redirect()->back();

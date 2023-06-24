@@ -10,7 +10,7 @@
             <a href="{{route("article.index")}}" class=" btn btn-outline-dark">Article List</a>
             <h1 class="my-4">{{$article->title}}</h1>
             <p class="">{{$article->description}}</p>
-            
+
         </div>
     </div>
 </div>
