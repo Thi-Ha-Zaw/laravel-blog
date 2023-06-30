@@ -45,8 +45,26 @@
                                         @method('delete')
                                     </form>
                                 </td>
-                                <td>{{ $category->updated_at->diffForHumans() }}</td>
-                                <td>{{ $category->created_at->diffForHumans() }}</td>
+                                <td>
+                                    <p class=" mb-0 small">
+                                        <i class=" bi bi-clock"></i>
+                                        {{ $category->updated_at->format("h:i a") }}
+                                    </p>
+                                    <p class=" mb-0 small">
+                                        <i class=" bi bi-calendar"></i>
+                                        {{ $category->updated_at->format("d M Y") }}
+                                    </p>
+                                </td>
+                                <td>
+                                    <p class=" mb-0 small">
+                                        <i class=" bi bi-clock"></i>
+                                        {{ $category->created_at->format("h:i a") }}
+                                    </p>
+                                    <p class=" mb-0 small">
+                                        <i class=" bi bi-calendar"></i>
+                                        {{ $category->created_at->format("d M Y") }}
+                                    </p>
+                                </td>
                             </tr>
                         @empty
                             <tr class=" text-center">

@@ -1,8 +1,11 @@
 <div>
+
+    {{-- for displaying comment --}}
+
     @forelse ($article->comments()->whereNull("parent_id")->latest("id")->get() as $comment)
         <div class="card mb-3">
             <div class="card-body">
-                <i class=" bi bi-chat-right-text-fill me-2"></i><span>{{ $comment->content }}</span>
+                <i class=" bi bi-chat-text-fill fs-5 me-2"></i><span>{{ $comment->content }}</span>
                 <div class="">
                     <span class=" badge bg-black"> <i class=" bi bi-person"></i> {{ $comment->user->name }}</span>
                     <span class=" badge bg-black"> <i
@@ -17,26 +20,32 @@
                             </button>
                         </form>
                     @endcan
+
+                    {{-- for displaying replying box --}}
+
                     @auth
                         <span role="button" class=" user-select-none badge bg-black reply-btn">
                             <i class=" bi bi-reply"></i>
                             Reply
                         </span>
 
-                        <form action="{{ route('comment.store') }}" class=" mt-2 d-none" method="post">
+                        <form action="{{ route('comment.store') }}" class=" mt-2 d-none ms-4" method="post">
                             @csrf
                             <input type="hidden" name="parent_id" value="{{ $comment->id }}">
                             <input type="hidden" name="article_id" value="{{ $article->id }}">
                             <textarea name="content" rows="2" class=" form-control"
                                 placeholder=" replying comment {{ $comment->user->name }}'s comment"></textarea>
-                            <div class=" d-flex justify-content-between align-items-end mt-2">
+                            <div class=" d-flex justify-content-between align-items-start mt-2">
                                 <p class=" mb-0">Replying as {{ Auth::user()->name }}</p>
-                                <button class=" btn btn-sm btn-dark">Reply</button>
+                                <button class=" btn btn-sm btn-dark px-4">Reply</button>
                             </div>
                         </form>
 
                     @endauth
                 </div>
+
+                {{-- for displaying replies --}}
+
                 @foreach ($comment->replies()->latest('id')->get() as $reply)
                     <div class="card mt-2 ms-4">
                         <div class="card-body">
@@ -57,7 +66,6 @@
                                         </button>
                                     </form>
                                 @endcan
-
                             </div>
                         </div>
                     </div>
