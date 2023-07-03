@@ -2,7 +2,7 @@
     <div class="container">
         <a class="navbar-brand" href="{{ url('/') }}">
             {{-- {{ config('app.name', 'Laravel') }} --}}
-            <img src="{{asset("images/two.png")}}" alt="" style="width: 150px">
+            <img src="{{ asset('images/two.png') }}" alt="" style="width: 150px">
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
@@ -22,6 +22,8 @@
                 {{-- for authenticated users --}}
                 @auth
 
+                    
+
                     @can('viewAny', App\Models\Category::class)
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('category.create') }}">Create Category</a>
@@ -36,7 +38,7 @@
                         <a class="nav-link" href="{{ route('article.create') }}">Create Article</a>
                     </li>
 
-                    @can("admin-only")
+                    @can('admin-only')
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('users') }}">Users</a>
                         </li>
