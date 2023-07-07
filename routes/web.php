@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CommentController;
@@ -39,4 +40,9 @@ Route::middleware('auth')->prefix("dashboard")->group(function () {
     Route::get('/home', [HomeController::class, 'index'])->name('home');
     Route::get('/users', [HomeController::class, "users"])->name("users")->can("admin-only");
 
+});
+
+Route::middleware(['auth','admin'])->group(function () {
+    Route::post('users/{user}/ban', [AdminController::class, 'banUser'])->name('admin.banUser');
+    Route::post('users/{user}/recall', [AdminController::class, 'recallUser'])->name('admin.recallUser');
 });

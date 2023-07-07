@@ -4,6 +4,11 @@
     <div class=" container">
         <div class="row justify-content-center mt-3">
             <div class="col-10">
+                @if (auth()->user() && auth()->user()->is_banned)
+                    <div class="alert alert-dark w-75">
+                        You are currently banned and cannot perform certain actions....
+                    </div>
+                @else
                 <h1 class=" mb-4">Article Lists</h1>
                 <a href="{{ route('article.create') }}" class=" btn btn-dark mb-4">Create</a>
                 <table class=" table">
@@ -93,6 +98,7 @@
                 <div>
                     {{ $articles->onEachSide(1)->links() }}
                 </div>
+                @endif
             </div>
         </div>
     </div>

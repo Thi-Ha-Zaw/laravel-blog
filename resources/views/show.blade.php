@@ -12,19 +12,26 @@
         </div>
         <p class=" text-black-50">{{ $article->description }}</p>
 
-       @include("layouts.comment")
-        @auth
-            <div>
-                <form action="{{ route('comment.store') }}" method="post">
-                    @csrf
-                    <input type="hidden" name="article_id" value="{{ $article->id }}">
-                    <textarea name="content" rows="4" class=" form-control" placeholder="Say Something about this article....."></textarea>
-                    <div class=" d-flex justify-content-between align-items-end mt-2">
-                        <p class=" mb-0">Commenting as {{ Auth::user()->name }}</p>
-                        <button class=" btn btn-sm btn-dark">Comment</button>
-                    </div>
-                </form>
+
+        @if (auth()->user() && auth()->user()->is_banned)
+            <div class="alert alert-dark">
+                You are currently banned and cannot perform comment Actions.
             </div>
-        @endauth
+        @else
+            @include('layouts.comment')
+            @auth
+                <div>
+                    <form action="{{ route('comment.store') }}" method="post">
+                        @csrf
+                        <input type="hidden" name="article_id" value="{{ $article->id }}">
+                        <textarea name="content" rows="4" class=" form-control" placeholder="Say Something about this article....."></textarea>
+                        <div class=" d-flex justify-content-between align-items-end mt-2">
+                            <p class=" mb-0">Commenting as {{ Auth::user()->name }}</p>
+                            <button class=" btn btn-sm btn-dark">Comment</button>
+                        </div>
+                    </form>
+                </div>
+            @endauth
+        @endif
     </div>
 @endsection

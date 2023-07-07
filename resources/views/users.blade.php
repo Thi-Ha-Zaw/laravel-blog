@@ -33,6 +33,21 @@
                                     {{$user->articles->count()}}
                                 </td>
                                 <td>
+                                    @if($user->is_banned)
+                                        <form action="{{ route('admin.recallUser', $user) }}" method="POST" class="inline">
+                                            @csrf
+                                            @method('POST')
+                                            <button type="submit" class="btn btn-dark">Recall</button>
+                                        </form>
+                                    @else
+                                        <form action="{{ route('admin.banUser', $user) }}" method="POST" class="inline">
+                                            @csrf
+                                            @method('POST')
+                                            <button type="submit" class="btn btn-danger">Ban</button>
+                                        </form>
+                                    @endif
+                                </td>
+                                {{-- <td> --}}
                                     {{-- <div class=" btn-group btn-group-sm">
                                         <a class=" btn btn-outline-dark" href="{{ route('article.show', $user->id) }}">
                                             <i class=" bi bi-info"></i>
@@ -49,7 +64,7 @@
                                         @csrf
                                         @method('delete')
                                     </form> --}}
-                                </td>
+                                {{-- </td> --}}
                                 <td>{{ $user->updated_at->diffForHumans() }}</td>
                                 <td>{{ $user->created_at->diffForHumans() }}</td>
                             </tr>

@@ -23,7 +23,9 @@
 
                     {{-- for displaying replying box --}}
 
+
                     @auth
+
                         <span role="button" class=" user-select-none badge bg-black reply-btn">
                             <i class=" bi bi-reply"></i>
                             Reply
@@ -40,7 +42,7 @@
                                 <button class=" btn btn-sm btn-dark px-4">Reply</button>
                             </div>
                         </form>
-
+                       
                     @endauth
                 </div>
 
