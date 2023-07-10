@@ -37,13 +37,13 @@
                                         <form action="{{ route('admin.recallUser', $user) }}" method="POST" class="inline">
                                             @csrf
                                             @method('POST')
-                                            <button type="submit" class="btn btn-dark">Recall</button>
+                                            <button type="submit" class="btn btn-dark btn-sm">Recall</button>
                                         </form>
                                     @else
                                         <form action="{{ route('admin.banUser', $user) }}" method="POST" class="inline">
                                             @csrf
                                             @method('POST')
-                                            <button type="submit" class="btn btn-danger">Ban</button>
+                                            <button type="submit" class="btn btn-danger btn-sm">Ban</button>
                                         </form>
                                     @endif
                                 </td>

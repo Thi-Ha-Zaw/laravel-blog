@@ -22,17 +22,19 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+//for guest user routes
 Route::controller(PageController::class)->group(function(){
     Route::get("/","index")->name("index");
     Route::get("/article/{slug}","show")->name("detail");
     Route::get("/category/{slug}","categorized")->name("categorized");
 });
 
-Auth::routes();
+Auth::routes(['verify'=>true]);
 
-Route::resource("comment",CommentController::class)->only(["store","update","destroy"])->middleware("auth");
+//for auth user routes
+Route::resource("comment",CommentController::class)->only(["store","update","destroy"])->middleware(["auth",'verified']);
 
-Route::middleware('auth')->prefix("dashboard")->group(function () {
+Route::middleware(['auth','verified'])->prefix("dashboard")->group(function () {
 
     Route::resource("article", ArticleController::class);
     Route::resource("category", CategoryController::class)->middleware("can:viewAny," . Category::class);
@@ -42,6 +44,7 @@ Route::middleware('auth')->prefix("dashboard")->group(function () {
 
 });
 
+//for admin user routes
 Route::middleware(['auth','admin'])->group(function () {
     Route::post('users/{user}/ban', [AdminController::class, 'banUser'])->name('admin.banUser');
     Route::post('users/{user}/recall', [AdminController::class, 'recallUser'])->name('admin.recallUser');

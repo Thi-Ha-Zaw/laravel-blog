@@ -8,6 +8,7 @@ use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\ValidationException;
 
 class RegisterController extends Controller
 {
@@ -64,6 +65,11 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        if (!str_ends_with($data['email'], '@ucsm.edu.mm')) {
+            throw ValidationException::withMessages([
+                'email' => ['Only UCSM email addresses are allowed.'],
+            ]);
+        }
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],

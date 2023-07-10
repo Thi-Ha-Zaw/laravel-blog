@@ -47,6 +47,7 @@ class PageController extends Controller
                     $builder->orWhere("description", "like", "%" . $keyword . "%");
                 });
             })
+            ->latest("id")
             ->paginate(10)->withQueryString()
         ]);
 

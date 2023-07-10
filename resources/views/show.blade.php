@@ -10,7 +10,7 @@
             <span class=" badge bg-black">{{ $article->category->title ?? 'Unknown' }}</span>
             <span class=" badge bg-black">{{ $article->created_at->format('d M Y') }}</span>
         </div>
-        <p class=" text-black-50">{{ $article->description }}</p>
+        <p class=" text-black-50" style="word-wrap: break-word">{{ $article->description }}</p>
 
 
         @if (auth()->user() && auth()->user()->is_banned)

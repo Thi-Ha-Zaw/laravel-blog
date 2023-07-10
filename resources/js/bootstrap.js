@@ -1,4 +1,5 @@
 import 'bootstrap';
+import * as mdb from 'mdb-ui-kit'; // lib
 
 /**
  * We'll load the axios HTTP library which allows us to easily issue requests
