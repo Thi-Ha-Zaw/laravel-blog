@@ -7,6 +7,7 @@ namespace App\Providers;
 use App\Models\Article;
 use App\Models\Category;
 use App\Models\User;
+use App\Policies\ArticlePolicy;
 use App\Policies\CategoryPolicy;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Gate;
@@ -21,7 +22,7 @@ class AuthServiceProvider extends ServiceProvider
     protected $policies = [
 
         Category::class => CategoryPolicy::class,
-        Article::class => CategoryPolicy::class
+        Article::class => ArticlePolicy::class
 
     ];
 
@@ -30,21 +31,21 @@ class AuthServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        Gate::define("article-update",function(User $user,Article $article){
-            return $user->id == $article->user_id;
-        });
+        // Gate::define("article-update",function(User $user,Article $article){
+        //     return $user->id == $article->user_id;
+        // });
 
-        Gate::define("article-delete",function(User $user,Article $article){
-            return $user->id == $article->user_id;
-        });
+        // Gate::define("article-delete",function(User $user,Article $article){
+        //     return $user->id == $article->user_id;
+        // });
 
-        Gate::before(function(User $user){
-            // $admins = [1,5,7];
-            // if(in_array($user->id,$admins)){
-            //     return true;
-            // }
-            if($user->role === "admin") return true;
-        });
+        // Gate::before(function(User $user){
+        //     // $admins = [1,5,7];
+        //     // if(in_array($user->id,$admins)){
+        //     //     return true;
+        //     // }
+        //     if($user->role === "admin") return true;
+        // });
 
         // Gate::define("user-list",function(User $user){
         //     if($user->role === "admin")

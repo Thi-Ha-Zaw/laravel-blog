@@ -1,15 +1,19 @@
 // Fonts
-@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,500;0,700;0,900;1,300&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,500;0,700;0,900;1,300&display=swap");
+
+
 
 // Variables
-@import 'variables';
+@import "variables";
 
 // Bootstrap icons
 @import "bootstrap-icons/font/bootstrap-icons.css";
 
 // Bootstrap
-@import 'bootstrap/scss/bootstrap';
-@import 'mdb-ui-kit/css/mdb.min.css';
+@import "bootstrap/scss/bootstrap";
+@import "mdb-ui-kit/css/mdb.min.css";
+
+@import "../../node_modules/swiper/swiper-bundle.min.css";
 
 .pagination > li > a,
 .pagination > li > span {
@@ -25,4 +29,74 @@
     background-color: black;
     border-color: black;
 }
+
+//swiper
+
+.swiper {
+    width: 100%;
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
+
+.swiper-slide {
+    background-position: center;
+    background-size: cover;
+    width: 400px;
+    padding: 10px;
+    border-radius: 15px;
+    height: 400px;
+    background: #fff;
+    box-shadow: 0px 15px 50px rgba(0, 0, 0, 0.2);
+    filter: blur(2px);
+}
+
+.swiper-slide-active {
+    filter: blur(0px) !important;
+}
+
+.swiper-slide img {
+    display: block;
+    width: 100%;
+    height: 380px;
+    object-fit: cover;
+    border-radius: 5px;
+
+}
+
+.swiper-3d .swiper-slide-shadow-left,
+.swiper-3d .swiper-slide-shadow-right {
+    background-image: none;
+}
+
+//latest Article card
+.latestArticle{
+    position: relative;
+    transition: 0.4s ease-in-out;
+
+
+    .latestArticle-detail{
+        background : rgba(0,0,0,0.1);
+        height: 100%;
+        width: 100%;
+        position: absolute;
+        top: 0;
+        opacity: 1;
+        transition: 0.4s ease-in-out;
+    }
+
+    .latestArticle-category{
+        position: absolute;
+        right: 0 ;
+    }
+
+    .latestArticle-text{
+        position: absolute;
+        bottom: 0 ;
+
+    }
+
+
+}
+
+
 

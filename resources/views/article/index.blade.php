@@ -11,6 +11,9 @@
                 @else
                 <h1 class=" mb-4">Article Lists</h1>
                 <a href="{{ route('article.create') }}" class=" btn btn-dark mb-4">Create</a>
+
+                {{-- aritle lists --}}
+
                 <table class=" table">
                     <thead>
                         <tr>
@@ -45,12 +48,12 @@
                                         <a class=" btn btn-outline-dark" href="{{ route('article.show', $article->id) }}">
                                             <i class=" bi bi-info"></i>
                                         </a>
-                                        @can('article-update', $article)
+                                        @can('update', $article)
                                             <a class=" btn btn-outline-dark" href="{{ route('article.edit', $article->id) }}">
                                                 <i class=" bi bi-pencil"></i>
                                             </a>
                                         @endcan
-                                        @can('article-delete', $article)
+                                        @can('delete', $article)
                                             <button type="submit" form="articleDelForm{{ $article->id }}"
                                                 class=" btn btn-outline-dark">
                                                 <i class=" bi bi-trash3"></i>

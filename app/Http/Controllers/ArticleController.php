@@ -78,7 +78,7 @@ class ArticleController extends Controller
      */
     public function edit(Article $article)
     {
-        Gate::authorize("article-update", $article);
+        Gate::authorize('update', $article);
         return view("article.edit", compact('article'));
     }
 
@@ -88,7 +88,7 @@ class ArticleController extends Controller
     public function update(UpdateArticleRequest $request, Article $article)
     {
 
-        Gate::authorize("article-update", $article);
+        Gate::authorize('update', $article);
 
         $article->update([
             "title" => $request->title,
@@ -107,7 +107,7 @@ class ArticleController extends Controller
     public function destroy(Article $article)
     {
 
-        Gate::authorize("article-delete", $article);
+        Gate::authorize('delete', $article);
 
         $article->delete();
         return redirect()->back();

@@ -20,11 +20,13 @@
     <div id="app">
        @include("layouts.nav")
 
-        <main class="py-4">
+        <main class="pb-4">
             @yield('content')
         </main>
 
     </div>
 </body>
 <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+
+@stack('script')
 </html>

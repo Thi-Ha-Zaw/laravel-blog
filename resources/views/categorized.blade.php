@@ -1,18 +1,22 @@
-@extends("layouts.master")
+@extends('layouts.master')
 
 @section('content')
     @if (request()->has('keyword') && $category->title)
         <div class=" justify-content-between d-flex">
-            <p class=" fw-bold">Showing articles searched by ' {{ request()->keyword }} ' and '{{$category->title}}' category</p>
+            <p class=" fw-bold">Showing articles searched by ' {{ request()->keyword }} ' and '{{ $category->title }}'
+                category</p>
             <a href="{{ route('index') }}" class=" text-dark">See All</a>
         </div>
-
-        @elseif ($category->title)
+    @elseif ($category->title)
         <div class=" justify-content-between d-flex">
-            <p class=" fw-bold">Showing articles searched by '{{$category->title}}' category</p>
+            <p class=" fw-bold">Showing articles searched by '{{ $category->title }}' category</p>
             <a href="{{ route('index') }}" class=" text-dark">See All</a>
         </div>
     @endif
+
+    @include('layouts.category-nav')
+
+
     @forelse ($articles as $article)
         <div class="card border-0 shadow p-3 mb-3">
             <div class="card-body">

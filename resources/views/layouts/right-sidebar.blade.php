@@ -1,4 +1,6 @@
 <div class=" position-sticky" style="top: 50px">
+
+    {{-- search bar  --}}
     <div class=" mb-4">
         <p class=" mb-2">Article Search</p>
         <form action="">
@@ -10,6 +12,9 @@
             </div>
         </form>
     </div>
+
+    {{-- categories list  --}}
+
     <div class=" mb-4">
         <div class=" list-group">
             <a href="{{ route('index') }}" class=" list-group-item transition duration-150 list-group-item-action ">
@@ -23,6 +28,8 @@
             @endforeach
         </div>
     </div>
+
+    {{-- Latest Articles  --}}
     <div class=" mb-4">
         <p class=" mb-2">Recent Articles</p>
         <div class=" list-group">

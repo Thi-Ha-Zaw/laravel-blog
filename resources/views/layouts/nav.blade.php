@@ -84,7 +84,7 @@
                         </div>
                     </li>
                     <li class="nav-item ms-0">
-                        <a style="width: 45px;height:40px;background-color:rgb(49, 49, 49)" class="nav-link d-flex justify-content-center align-items-center  rounded-circle" href="{{ route('chatify') }}">
+                        <a style="width: 40px;height:40px;background-color:rgb(49, 49, 49)" class="nav-link d-flex justify-content-center align-items-center  rounded-circle" href="{{ route('chatify') }}">
                             <i class=" bi bi-messenger fs-5 text-white"></i>
                         </a>
                     </li>
