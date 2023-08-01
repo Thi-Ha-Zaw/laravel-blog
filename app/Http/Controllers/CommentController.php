@@ -2,9 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\CommentDeleted;
+use App\Events\NewCommentPosted;
+use App\Events\NewReplyPosted;
+use App\Events\ReplyDeleted;
 use App\Models\Comment;
 use App\Http\Requests\StoreCommentRequest;
 use App\Http\Requests\UpdateCommentRequest;
+use Exception;
 use Illuminate\Support\Facades\Auth;
 
 class CommentController extends Controller
@@ -33,12 +38,22 @@ class CommentController extends Controller
         $comment = new Comment();
         $comment->content = $request->content;
         $comment->article_id = $request->article_id;
-        if($request->has("parent_id")){
+        if ($request->has("parent_id")) {
             $comment->parent_id = $request->parent_id;
         }
         $comment->user_id = Auth::id();
 
+
+
         $comment->save();
+
+        // event(new NewCommentPosted($comment,auth()->user()->can('delete',$comment)));
+
+        if ($request->has("parent_id")) {
+            broadcast(new NewReplyPosted($comment));
+        } else {
+            broadcast(new NewCommentPosted($comment));
+        }
         return redirect()->back();
     }
 
@@ -71,9 +86,22 @@ class CommentController extends Controller
      */
     public function destroy(Comment $comment)
     {
-        $this->authorize("delete",$comment);
-        $comment->delete();
 
-        return redirect()->back();
+
+        try {
+
+            $this->authorize("delete", $comment);
+            $comment->delete();
+            Comment::where('parent_id','=',$comment->id)->delete();
+            $allComment = Comment::all();
+            if ($comment->parent_id == null) {
+                event(new CommentDeleted($allComment,$comment->id));
+            } else {
+                event(new ReplyDeleted($comment->id));
+            }
+            return redirect()->back();
+        } catch (Exception $e) {
+            dd($e);
+        }
     }
 }

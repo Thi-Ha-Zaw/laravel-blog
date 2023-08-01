@@ -4,12 +4,14 @@
             {{-- {{ config('app.name', 'Laravel') }} --}}
             <img src="{{asset("images/two.png")}}" alt="" style="width: 190px">
         </a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+        <button class="btn btn-dark btn-sm py-0 d-block d-md-none " type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
-            <span class="navbar-toggler-icon"></span>
+            <span class=" ">
+                <i class=" bi bi-list fs-3 text-white fw-bolder"></i>
+            </span>
         </button>
 
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <div class="collapse navbar-collapse text-center text-lg-start" id="navbarSupportedContent">
             <!-- Left Side Of Navbar -->
             <ul class="navbar-nav me-auto">
 
@@ -21,8 +23,15 @@
 
                 {{-- for authenticated users --}}
                 @auth
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('index') }}">Home</a>
+                </li>
 
-                    @can('viewAny', App\Models\Category::class)
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('article.index') }}">Dashboard</a>
+                </li>
+
+                    {{-- @can('viewAny', App\Models\Category::class)
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('category.create') }}">Create Category</a>
                         </li>
@@ -30,13 +39,13 @@
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('category.index') }}">Category Lists</a>
                         </li>
-                    @endcan
+                    @endcan --}}
 
-                    <li class="nav-item">
+                    {{-- <li class="nav-item">
                         <a class="nav-link" href="{{ route('article.create') }}">Create Article</a>
-                    </li>
+                    </li> --}}
 
-                    @can("admin-only")
+                    {{-- @can("admin-only")
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('users') }}">Users</a>
                         </li>
@@ -44,7 +53,7 @@
 
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('article.index') }}">Article lists</a>
-                    </li>
+                    </li> --}}
 
 
                 @endauth

@@ -21,7 +21,7 @@
             @include('layouts.comment')
             @auth
                 <div>
-                    <form action="{{ route('comment.store') }}" method="post">
+                    <form id="comment-form" action="{{ route('comment.store') }}" method="post">
                         @csrf
                         <input type="hidden" name="article_id" value="{{ $article->id }}">
                         <textarea name="content" rows="4" class=" form-control" placeholder="Say Something about this article....."></textarea>
@@ -35,3 +35,23 @@
         @endif
     </div>
 @endsection
+
+@push('script')
+@auth
+<script>
+    window.Laravel = {!! json_encode([
+        'isAuthenticated' => Auth::check(),
+        'userId' => Auth::id(),
+        'adminId' => $adminId,
+        'userName' => Auth::user()->name
+
+    ]) !!};
+    window.LaravelToken = {
+        csrfToken: '{{ csrf_token() }}' ,
+       
+    }
+</script>
+@endauth
+
+@endpush
+

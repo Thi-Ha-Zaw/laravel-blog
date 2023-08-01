@@ -8,16 +8,20 @@
     </div>
 @endif --}}
 
-<div>
-    <div class=" d-flex justify-content-between align-items-start my-3">
+
+<div class=" mb-5">
+    <div class=" row gap-lg-3 gap-4 justify-content-center justify-content-lg-between align-items-start my-3">
         {{-- categories list --}}
-        <div class="">
-            <div class=" d-flex gap-3">
-                <a href="{{ route('index') }}" class=" btn btn-dark btn-sm">
+        <div class=" col-12 col-lg-8">
+            <div class=" d-flex gap-3 flex-wrap flex-lg-row justify-content-center justify-content-lg-start"
+                id="categoryContainer">
+                <a href="{{ route('index') }}"
+                    class=" btn {{ request()->has('category') || request()->has('keyword') ? 'btn-outline-dark' : 'btn-dark' }} btn-sm">
                     All Articles
                 </a>
                 @foreach (App\Models\Category::all() as $category)
-                    <a href="{{ route('categorized', $category->slug) }}" class=" btn btn-dark btn-sm ">
+                    <a href="{{ route('categorized', ['slug' => $category->slug, 'category' => $category->slug]) }}"
+                        class=" btn  {{ request('category') === $category->slug ? 'btn-dark' : 'btn-outline-dark' }} btn-sm ">
                         {{ $category->title }}
                     </a>
                 @endforeach
@@ -25,10 +29,11 @@
         </div>
 
         {{-- search bar --}}
-        <div class="">
+        <div class=" col-6 d-none d-lg-block col-lg-3">
             <form action="">
                 <div class=" input-group">
                     <input type="text" name="keyword" value="{{ request()->keyword }}" class=" form-control">
+                    <input type="hidden" name="category" value="{{ request('category') }}">
                     <button class=" btn btn-dark">
                         <i class=" bi bi-search"></i>
                     </button>
@@ -45,11 +50,11 @@
 {{-- swiper --}}
 
 <h4>Latest Articles</h4>
-<div class=" card border-0 mb-3 shadow-0">
-    <div class="card-body">
+<div class="row ">
+    <div class=" col-12">
         <div class="swiper mySwiper">
             <div class="swiper-wrapper">
-                <div class="swiper-slide">
+                <div class="swiper-slide ">
                     {{-- Latest Articles Card --}}
                     <div class=" latestArticle">
                         <div class="">
@@ -168,6 +173,44 @@
                 <div class="swiper-slide">
                     <div class=" latestArticle">
                         <div class="">
+                            <img src="https://www.justinjoyce.dev/content/images/size/w1140/2023/07/ben-white-qDY9ahp0Mto-unsplash.jpg"
+                                alt="" class=" w-100 rounded-2">
+                        </div>
+                        <div class="latestArticle-detail rounded-2">
+                            <div class=" latestArticle-category p-3">
+                                <h4 class=" badge badge-dark">Food</h4>
+                            </div>
+                            <div class=" latestArticle-text p-3">
+                                <h5 class=" text-white mb-1">Apple Vision Pro is released now</h5>
+                                <p class=" text-white-50 small">Lorem ipsum, dolor sit amet consectetur adipisicing
+                                    nemo, totam facere velit vitae ipsa aperiam nisi earum excepturi omnis quibusdam
+                                    dicta!</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <div class=" latestArticle">
+                        <div class="">
+                            <img src="https://img.freepik.com/free-photo/peak-bamboo-lijiang-rural-mist_1417-410.jpg?w=1060&t=st=1690558015~exp=1690558615~hmac=4edd9c139de39fb0aae96dd5cf562c4bfdb87072e094cbce2d599a36b603c1af"
+                                alt="" class=" w-100 rounded-2">
+                        </div>
+                        <div class="latestArticle-detail rounded-2">
+                            <div class=" latestArticle-category p-3">
+                                <h4 class=" badge badge-dark">Food</h4>
+                            </div>
+                            <div class=" latestArticle-text p-3">
+                                <h5 class=" text-white mb-1">Apple Vision Pro is released now</h5>
+                                <p class=" text-white-50 small">Lorem ipsum, dolor sit amet consectetur adipisicing
+                                    nemo, totam facere velit vitae ipsa aperiam nisi earum excepturi omnis quibusdam
+                                    dicta!</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <div class=" latestArticle">
+                        <div class="">
                             <img src="https://img.freepik.com/free-photo/green-field-tree-blue-skygreat-as-backgroundweb-banner-generative-ai_1258-158251.jpg?w=1380&t=st=1689350307~exp=1689350907~hmac=f811d038d68ee9f0502f83bd67f20773aeed5ff944b12c04d8f5e0d215bc36e0"
                                 alt="" class=" w-100 rounded-2">
                         </div>
@@ -203,13 +246,29 @@
                         </div>
                     </div>
                 </div>
-
+                <div class="swiper-slide">
+                    <div class=" latestArticle">
+                        <div class="">
+                            <img src="https://img.freepik.com/free-photo/asian-boy-three-little-girls-student-uniform-sitting-grass-enjoy-play-hand-game-together-they-talk-laugh-with-funny-copy-space-rural-lifestyle-concept_1150-55897.jpg?w=1380&t=st=1690730948~exp=1690731548~hmac=e03facd5e0b4bbb7bddfa4b008633253b3b95474cdba064e9606ed804b5f9afa"
+                                alt="" class=" w-100 rounded-2">
+                        </div>
+                        <div class="latestArticle-detail rounded-2">
+                            <div class=" latestArticle-category p-3">
+                                <h4 class=" badge badge-dark">Food</h4>
+                            </div>
+                            <div class=" latestArticle-text p-3">
+                                <h5 class=" text-white mb-1">Apple Vision Pro is released now</h5>
+                                <p class=" text-white-50 small">Lorem ipsum, dolor sit amet consectetur adipisicing
+                                    nemo, totam facere velit vitae ipsa aperiam nisi earum excepturi omnis quibusdam
+                                    dicta!</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="swiper-pagination"></div>
+            <div class="swiper-pagination d-md-none d-block"></div>
         </div>
     </div>
 </div>
 
 @vite(['resources/js/swiper.js'])
-
-

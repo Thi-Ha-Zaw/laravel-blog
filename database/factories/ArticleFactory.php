@@ -24,7 +24,8 @@ class ArticleFactory extends Factory
             "title" => $title,
             "slug" => Str::slug($title),
             "description" => $description,
-            "excert" => Str::words($description,50,"..."),
+            "excert" => Str::words($description,40,"..."),
+            // "excert" => Str::limit($description,300,"..."),
             "category_id" => rand(1,5),
             "user_id" => rand(1,12)
         ];

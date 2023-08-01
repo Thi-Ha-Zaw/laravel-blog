@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('content')
-    @if (request()->has('keyword') && $category->title)
+    {{-- @if (request()->has('keyword') && $category->title)
         <div class=" justify-content-between d-flex">
             <p class=" fw-bold">Showing articles searched by ' {{ request()->keyword }} ' and '{{ $category->title }}'
                 category</p>
@@ -12,15 +12,17 @@
             <p class=" fw-bold">Showing articles searched by '{{ $category->title }}' category</p>
             <a href="{{ route('index') }}" class=" text-dark">See All</a>
         </div>
-    @endif
+    @endif --}}
 
     @include('layouts.category-nav')
 
 
-    @forelse ($articles as $article)
-        <div class="card border-0 shadow p-3 mb-3">
-            <div class="card-body">
-                <h3 class=" mb-2">
+    <div class="row mt-5">
+        @forelse ($articles as $article)
+       <div class="col-12 col-md-6 col-lg-4">
+        <div class="card border-0 shadow p-3 mb-3 blog-card ">
+            <div class="card-body d-flex flex-column">
+                <h3 class=" mb-2 text-truncate">
                     <a href="{{ route('detail', $article->slug) }}"
                         class=" text-decoration-none text-dark">{{ $article->title }}</a>
                 </h3>
@@ -29,10 +31,11 @@
                     <span class=" badge bg-black">{{ $article->category->title ?? 'Unknown' }}</span>
                     <span class=" badge bg-black">{{ $article->created_at->format('d M Y') }}</span>
                 </div>
-                <p class=" text-black-50">{{ Str::words($article->description, 50, '...') }}</p>
-                <a href="{{ route('detail', $article->slug) }}" class=" btn btn-dark px-4 py-1 mt-2">See More</a>
+                <p class=" text-black-50">{{ $article->excert }}</p>
+                <a href="{{ route('detail', $article->slug) }}" class=" btn btn-dark px-4 py-1 mt-auto">See More</a>
             </div>
         </div>
+       </div>
     @empty
         <div class=" justify-content-center d-flex mt-5">
             <div class=" w-75 shadow-sm p-5 text-center">
@@ -41,7 +44,9 @@
             </div>
         </div>
     @endforelse
+    </div>
     <div class="">
         {{ $articles->onEachSide(1)->links() }}
     </div>
 @endsection
+

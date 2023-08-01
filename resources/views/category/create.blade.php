@@ -1,10 +1,10 @@
-@extends('layouts.app')
+@extends('layouts.dashboard')
 
 
 @section('content')
-    <div class="container">
-        <div class="row justify-content-center ">
-            <div class="col-8">
+
+        <div class="row justify-content-center bg-white mt-5 pb-5 shadow rounded mx-3">
+            <div class=" col-8">
                 <h1 class="  my-5">Create Category</h1>
                 <form action="{{route("category.store")}}" method="post">
                     @csrf
@@ -20,5 +20,5 @@
                 </form>
             </div>
         </div>
-    </div>
+
 @endsection

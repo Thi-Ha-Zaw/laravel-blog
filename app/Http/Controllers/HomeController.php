@@ -40,7 +40,7 @@ class HomeController extends Controller
             $query->orderBy("name",$sortKey);
         })
         ->latest("id")
-        ->paginate(7)->withQueryString();
+        ->paginate(10)->withQueryString();
         return view("users",compact('users'));
     }
 }

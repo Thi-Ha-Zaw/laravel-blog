@@ -7,16 +7,29 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    {{-- <title>{{ config('app.name', 'Laravel') }}</title> --}}
+    <title>UCSM News</title>
 
     <!-- Fonts -->
-    <link rel="dns-prefetch" href="//fonts.bunny.net">
-    <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
+    {{-- <link rel="dns-prefetch" href="//fonts.bunny.net"> --}}
+    {{-- <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet"> --}}
 
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 </head>
 <body>
+    <div id="loader">
+        <div class=" d-flex min-vh-100 justify-content-center align-items-center fixed-top " style="background-color:#111;">
+            <div class="circ">
+                    <div class="load">Loading . . . </div>
+                    <div class="hands"></div>
+                    <div class="body"></div>
+                    <div class="head">
+                    <div class="eye"></div>
+                    </div>
+            </div>
+        </div>
+    </div>
     <div id="app">
        @include("layouts.nav")
 

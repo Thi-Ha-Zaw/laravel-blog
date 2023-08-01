@@ -213,20 +213,23 @@
 
     {{-- for displaying aritcles  --}}
 
-    @forelse ($articles as $article)
-        <div class="card  border-0 shadow p-3 mb-3">
-            <div class="card-body">
-                <h3 class=" mb-2">
-                    <a href="{{ route('detail', $article->slug) }}"
-                        class=" text-decoration-none text-dark">{{ $article->title }}</a>
-                </h3>
-                <div class=" mb-4">
-                    <span class=" badge bg-black">{{ $article->user?->name }}</span>
-                    <span class=" badge bg-black">{{ $article->category->title ?? 'Unknown' }}</span>
-                    <span class=" badge bg-black">{{ $article->created_at->format('d M Y') }}</span>
+    <div class="row mt-5">
+        @forelse ($articles as $article)
+        <div class="col-lg-4 col-md-6 col-12">
+            <div class="card  border-0 shadow p-3 mb-3 blog-card">
+                <div class="card-body d-flex flex-column">
+                    <h3 class=" mb-2">
+                        <a href="{{ route('detail', $article->slug) }}"
+                            class=" text-decoration-none d-block text-dark text-truncate">{{ $article->title }}</a>
+                    </h3>
+                    <div class=" mb-4">
+                        <span class=" badge bg-black">{{ $article->user?->name }}</span>
+                        <span class=" badge bg-black">{{ $article->category->title ?? 'Unknown' }}</span>
+                        <span class=" badge bg-black">{{ $article->created_at->format('d M Y') }}</span>
+                    </div>
+                    <p class=" text-black-50">{{ $article->excert }}</p>
+                    <a href="{{ route('detail', $article->slug) }}" class=" btn btn-dark px-4 py-1 mt-2 mt-auto">See More</a>
                 </div>
-                <p class=" text-black-50">{{ $article->excert }}</p>
-                <a href="{{ route('detail', $article->slug) }}" class=" btn btn-dark px-4 py-1 mt-2">See More</a>
             </div>
         </div>
     @empty
@@ -237,6 +240,7 @@
             </div>
         </div>
     @endforelse
+    </div>
     <div class="">
         {{ $articles->onEachSide(1)->links() }}
     </div>

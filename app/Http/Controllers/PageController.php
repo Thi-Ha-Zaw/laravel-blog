@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Article;
 use App\Models\Category;
+use App\Models\User;
 use Illuminate\Contracts\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 
@@ -32,7 +33,11 @@ class PageController extends Controller
 
     public function show($slug){
         $article = Article::where("slug",$slug)->firstorFail();
-        return view("show",compact('article'));
+        $adminId = User::where("role","admin")->get()->random()->id;
+        return view("show",[
+            'article' => $article,
+            'adminId' => $adminId
+        ]);
 
     }
 
