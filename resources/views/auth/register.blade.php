@@ -18,7 +18,7 @@
                                 <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
 
                                 @error('name')
-                                    <span class="invalid-feedback" role="alert">
+                                    <span class=" text-danger" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
@@ -103,63 +103,73 @@
                                             account
                                         </h5>
 
-                                        <div class="form-outline mb-4">
+                                       <div class="mb-4">
+                                        <div class="form-outline">
 
                                             <input type="text" id="form2Example17"
                                                 class="form-control mb-0 form-control-lg @error('name') is-invalid @enderror"
                                                 name="name" value="{{ old('name') }}" required autocomplete="name" />
                                             <label class="form-label" for="form2Example17">Your Name</label>
-                                            @error('name')
-                                                <div class="invalid-feedback mb-3 ">
+
+                                        </div>
+                                        @error('name')
+                                                <div class=" text-danger">
                                                     {{ $message }}
                                                 </div>
                                             @enderror
-                                        </div>
+                                       </div>
 
-                                        <div class="form-outline mb-4">
+                                        <div class="mb-4">
+                                            <div class="form-outline">
 
-                                            <input
-                                            type="email"
-                                            id="form2Example17"
-                                            {{-- pattern=".+@ucsm\.edu\.mm" --}}
-                                            class="form-control mb-0 form-control-lg @error('email') is-invalid @enderror"
-                                            name="email"
-                                            value="{{ old('email') }}"
-                                            required autocomplete="email"
-                                            />
-                                            <label class="form-label" for="form2Example17">Email address</label>
+                                                <input
+                                                type="email"
+                                                id="form2Example17"
+                                                pattern=".+@ucsm\.edu\.mm"
+                                                class="form-control mb-0 form-control-lg @error('email') is-invalid @enderror"
+                                                name="email"
+                                                value="{{ old('email') }}"
+                                                required autocomplete="email"
+                                                />
+                                                <label class="form-label" for="form2Example17">Email address</label>
+                                            </div>
                                             @error('email')
-                                                <div class="invalid-feedback mb-3 ">
-                                                    {{ $message }}
-                                                </div>
-                                            @enderror
+                                            <div class=" text-danger">
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
                                         </div>
 
-                                        <div class="form-outline mb-4">
-                                            <input type="password" id="form2Example27"
-                                                class="form-control mb-0 form-control-lg @error('password') is-invalid @enderror"
-                                                name="password" value="{{ old('password') }}" required
-                                                autocomplete="new-password" />
-                                            <label class="form-label" for="form2Example27">Password</label>
+                                        <div class="mb-4">
+                                            <div class="form-outline">
+                                                <input type="password" id="form2Example27"
+                                                    class="form-control mb-0 form-control-lg @error('password') is-invalid @enderror"
+                                                    name="password" value="{{ old('password') }}" required
+                                                    autocomplete="new-password" />
+                                                <label class="form-label" for="form2Example27">Password</label>
+
+                                            </div>
                                             @error('password')
-                                                <span class="invalid-feedback" role="alert">
-                                                    <strong>{{ $message }}</strong>
-                                                </span>
-                                            @enderror
+                                            <div class=" text-danger" >
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
                                         </div>
 
-                                        <div class="form-outline mb-4">
+                                       <div class="mb-4">
+                                        <div class="form-outline">
                                             <input type="password" id="form2Example27"
                                                 class="form-control mb-0 form-control-lg @error('password_confirmation') is-invalid @enderror"
                                                 name="password_confirmation" value="{{ old('password_confirmation') }}" required
                                                 autocomplete="new-password" />
                                             <label class="form-label" for="form2Example27">Password_confirmation</label>
                                             @error('password_confirmation')
-                                                <span class="invalid-feedback" role="alert">
-                                                    <strong>{{ $message }}</strong>
-                                                </span>
+                                                <div class=" text-danger">
+                                                    {{ $message }}
+                                                </div>
                                             @enderror
                                         </div>
+                                       </div>
                                         <div class="pt-1 mb-4">
                                             <button class="btn btn-dark btn-lg btn-block" type="submit">Register</button>
                                         </div>

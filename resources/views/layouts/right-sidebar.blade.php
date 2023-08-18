@@ -1,6 +1,6 @@
-<div class=" position-sticky" style="top: 50px">
+{{-- <div class=" position-sticky" style="top: 50px">
 
-    {{-- search bar  --}}
+    search bar
     <div class=" mb-4">
         <p class=" mb-2">Article Search</p>
         <form action="">
@@ -13,7 +13,7 @@
         </form>
     </div>
 
-    {{-- categories list  --}}
+    categories list
 
     <div class=" mb-4">
         <div class=" list-group">
@@ -29,7 +29,7 @@
         </div>
     </div>
 
-    {{-- Latest Articles  --}}
+    Latest Articles
     <div class=" mb-4">
         <p class=" mb-2">Recent Articles</p>
         <div class=" list-group">
@@ -42,4 +42,4 @@
         </div>
     </div>
 
-</div>
+</div> --}}

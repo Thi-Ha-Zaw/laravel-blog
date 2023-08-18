@@ -48,6 +48,8 @@ window.Echo = new Echo({
     encrypted: true,
 });
 
+//loader
+
 export let loader = document.getElementById('loader');
 
 window.addEventListener('load', function () {
@@ -67,7 +69,6 @@ window.Echo.channel(`comments`).listen(
             handleNewComment(event.comment);
             emptyCommentState.classList.add('d-none');
         } else {
-            console.log(emptyCommentState)
             emptyCommentState.classList.remove('d-none');
         }
     }

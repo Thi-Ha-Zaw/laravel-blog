@@ -20,7 +20,7 @@
     <div class="row mt-5">
         @forelse ($articles as $article)
        <div class="col-12 col-md-6 col-lg-4">
-        <div class="card border-0 shadow p-3 mb-3 blog-card ">
+        <div class="card slide-down border-0 shadow p-3 mb-3 blog-card ">
             <div class="card-body d-flex flex-column">
                 <h3 class=" mb-2 text-truncate">
                     <a href="{{ route('detail', $article->slug) }}"
@@ -40,7 +40,7 @@
         <div class=" justify-content-center d-flex mt-5">
             <div class=" w-75 shadow-sm p-5 text-center">
                 <h3 class=" mb-4">There is no articles.Try Now</h3>
-                <a href="{{ route('register') }}" class=" btn btn-dark px-5">Try Now</a>
+                <a href="{{ route('article.create') }}" class=" btn btn-dark px-5">Try Now</a>
             </div>
         </div>
     @endforelse

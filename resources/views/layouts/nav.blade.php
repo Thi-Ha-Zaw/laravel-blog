@@ -4,10 +4,10 @@
             {{-- {{ config('app.name', 'Laravel') }} --}}
             <img src="{{asset("images/two.png")}}" alt="" style="width: 190px">
         </a>
-        <button class="btn btn-dark btn-sm py-0 d-block d-md-none " type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+        <button class="btn btn-dark btn-sm   d-block d-md-none me-2 " type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
             <span class=" ">
-                <i class=" bi bi-list fs-3 text-white fw-bolder"></i>
+                <i class=" bi bi-text-right fs-3 text-white fw-bolder"></i>
             </span>
         </button>
 
@@ -18,13 +18,13 @@
             </ul>
 
             <!-- Right Side Of Navbar -->
-            <ul class="navbar-nav ms-auto">
+            <ul class="navbar-nav ms-auto ">
                 <!-- Authentication Links -->
 
                 {{-- for authenticated users --}}
                 @auth
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('index') }}">Home</a>
+                    <a class="nav-link" href="{{ route('home') }}">Welcome</a>
                 </li>
 
                 <li class="nav-item">
@@ -92,7 +92,7 @@
                             </form>
                         </div>
                     </li>
-                    <li class="nav-item ms-0">
+                    <li class="nav-item mx-auto mx-md-0">
                         <a style="width: 40px;height:40px;background-color:rgb(49, 49, 49)" class="nav-link d-flex justify-content-center align-items-center  rounded-circle" href="{{ route('chatify') }}">
                             <i class=" bi bi-messenger fs-5 text-white"></i>
                         </a>

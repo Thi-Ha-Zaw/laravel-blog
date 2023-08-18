@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 class PageController extends Controller
 {
     public function index(){
+
         $articles = Article::when(request()->has("keyword"),function($query){
             $query->where(function (Builder $builder) {
                 $keyword = request()->keyword;

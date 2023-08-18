@@ -2,8 +2,8 @@
 
 
 @section('content')
-    <div class=" row justify-content-center bg-white shadow rounded mt-5 mx-3 py-5">
-        <div class=" col-8">
+    <div class=" row justify-content-center bg-white shadow rounded mt-5 mx-md-3 mx-0 py-5">
+        <div class=" col-12 col-md-8">
             @if (auth()->user() && auth()->user()->is_banned)
                 <div class="alert alert-dark">
                     You are currently banned and cannot create articles.
@@ -17,7 +17,7 @@
                         <input type="text" class=" form-control @error('title') is-invalid @enderror" name="title"
                             value="{{ old('title') }}">
                         @error('title')
-                            <div class=" invalid-feedback">{{ $message }}</div>
+                            <div class=" text-danger">{{ $message }}</div>
                         @enderror
                     </div>
                     <div class=" mb-3">
@@ -39,7 +39,7 @@
                             {{ old('description') }}
                         </textarea>
                         @error('description')
-                            <div class=" invalid-feedback">{{ $message }}</div>
+                            <div class=" text-danger">{{ $message }}</div>
                         @enderror
                     </div>
                     <button type="submit" class=" btn btn-dark">Save Article</button>

@@ -13,15 +13,15 @@
     <div class=" row gap-lg-3 gap-4 justify-content-center justify-content-lg-between align-items-start my-3">
         {{-- categories list --}}
         <div class=" col-12 col-lg-8">
-            <div class=" d-flex gap-3 flex-wrap flex-lg-row justify-content-center justify-content-lg-start"
+            <div class=" slide-down d-flex gap-3 flex-wrap flex-lg-row justify-content-center justify-content-lg-start"
                 id="categoryContainer">
                 <a href="{{ route('index') }}"
-                    class=" btn {{ request()->has('category') || request()->has('keyword') ? 'btn-outline-dark' : 'btn-dark' }} btn-sm">
+                    class=" btn {{ request('category-slug') != null  ? 'btn-outline-dark' : 'btn-dark' }} btn-sm">
                     All Articles
                 </a>
                 @foreach (App\Models\Category::all() as $category)
-                    <a href="{{ route('categorized', ['slug' => $category->slug, 'category' => $category->slug]) }}"
-                        class=" btn  {{ request('category') === $category->slug ? 'btn-dark' : 'btn-outline-dark' }} btn-sm ">
+                    <a href="{{ route('categorized', ['slug' => $category->slug, 'category-slug' => $category->slug]) }}"
+                        class=" btn  {{ request('category-slug') === $category->slug ? 'btn-dark' : 'btn-outline-dark' }} btn-sm ">
                         {{ $category->title }}
                     </a>
                 @endforeach
@@ -30,10 +30,10 @@
 
         {{-- search bar --}}
         <div class=" col-6 d-none d-lg-block col-lg-3">
-            <form action="">
+            <form action="" class=" slide-down">
                 <div class=" input-group">
                     <input type="text" name="keyword" value="{{ request()->keyword }}" class=" form-control">
-                    <input type="hidden" name="category" value="{{ request('category') }}">
+                    <input type="hidden" name="category-slug" value="{{ request('category-slug') }}">
                     <button class=" btn btn-dark">
                         <i class=" bi bi-search"></i>
                     </button>
@@ -49,10 +49,10 @@
 
 {{-- swiper --}}
 
-<h4>Latest Articles</h4>
+<h4 class=" slide-down">Latest Articles</h4>
 <div class="row ">
     <div class=" col-12">
-        <div class="swiper mySwiper">
+        <div class="swiper mySwiper slide-down">
             <div class="swiper-wrapper">
                 <div class="swiper-slide ">
                     {{-- Latest Articles Card --}}
@@ -266,9 +266,9 @@
                     </div>
                 </div>
             </div>
-            <div class="swiper-pagination d-md-none d-block"></div>
+            <div class="swiper-pagination d-none"></div>
         </div>
     </div>
 </div>
 
-@vite(['resources/js/swiper.js'])
+@vite(['resources/js/swiper.js','resources/js/scrollAnimate.js'])

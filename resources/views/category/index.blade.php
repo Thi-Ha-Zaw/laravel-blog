@@ -2,11 +2,11 @@
 
 @section('content')
 
-        <div class="row justify-content-center mt-5">
-            <div class="col-8">
+        <div class="row justify-content-center bg-white shadow p-5 rounded mx-2 mt-5">
+            <div class="col-12">
                 {{-- <h1 class=" mb-4">Category Lists</h1> --}}
                 {{-- <a href="{{ route('category.create') }}" class=" btn btn-dark mb-4">Create</a> --}}
-                <div class=" table-responsive bg-white shadow p-5 rounded">
+                <div class=" table-responsive ">
                     <table class=" table">
                         <thead>
                             <tr>
@@ -34,7 +34,7 @@
                                                 </a>
                                             @endcan
                                             @can("delete",$category)
-                                                <button type="submit" form="categoryDelForm{{ $category->id }}"
+                                                <button type="submit"   form="categoryDelForm{{ $category->id }}"
                                                     class=" btn btn-outline-dark">
                                                     <i class=" bi bi-trash3"></i>
                                                 </button>
@@ -80,5 +80,5 @@
                 </div>
             </div>
         </div>
-
+{{-- @vite(['resources/js/alert.js']) --}}
 @endsection
