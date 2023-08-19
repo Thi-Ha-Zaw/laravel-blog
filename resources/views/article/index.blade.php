@@ -19,7 +19,8 @@
                                 <ul class="dropdown-menu dropdown-menu-end">
                                     <li class="dropdown-item">
                                         @can('update', $article)
-                                            <a class=" btn btn-outline-dark btn-sm px-5" href="{{ route('article.edit', $article->id) }}">
+                                            <a class=" btn btn-outline-dark btn-sm px-5"
+                                                href="{{ route('article.edit', $article->id) }}">
                                                 <i class=" bi bi-pencil"></i>
                                                 <span>Edi</span>
                                             </a>
@@ -42,24 +43,32 @@
                                 </ul>
                             </div>
                         </div>
-                        <div class="card-body  d-flex flex-column">
+                        <div class="card-body p-0  d-flex flex-column">
 
-                            <h3 class=" mb-2">
+                            <h4 class=" mb-2">
                                 <a href="{{ route('detail', $article->slug) }}"
                                     class=" text-decoration-none d-block text-dark text-truncate">{{ $article->title }}</a>
-                            </h3>
-                            <div class=" mb-4">
+                            </h4>
+                            <div class=" mb-2">
 
                                 <span class=" badge bg-black">{{ $article->category->title ?? 'Unknown' }}</span>
                                 <span class=" badge bg-black">{{ $article->created_at->format('d M Y') }}</span>
                                 <span class=" badge bg-black">{{ $article->user?->name }}</span>
-                                @if ($article->user->role == "admin")
-                                <img src="{{asset('images/bluemark.png')}}" alt="" height="20px">
+                                @if ($article->user->role == 'admin')
+                                    <img src="{{ asset('images/bluemark.png') }}" alt="" height="20px">
                                 @endif
                             </div>
-                            <p class=" text-black-50"> {{ Str::limit($article->description, 200, '...') }}</p>
-                            <a href="{{ route('article.show', $article->id) }}"
-                                class=" btn btn-dark px-4 py-1 mt-2 mt-auto">See More</a>
+                            {{-- <p class=" text-black-50"> {{ Str::limit($article->description, 200, '...') }}</p> --}}
+                            @if ($article->thumbnail)
+                                <img class=" rounded list-thumbnail" src="{{ asset(Storage::url($article->thumbnail)) }}"
+                                    alt="">
+                            @else
+                                <img class=" rounded list-thumbnail "
+                                    src="https://raw.githubusercontent.com/julien-gargot/images-placeholder/master/placeholder-square.png"
+                                    alt="">
+                            @endif
+                            <a href="{{ route('article.show', $article->id) }}" class=" btn btn-dark px-4 py-1 mt-auto">See
+                                More</a>
                         </div>
                     </div>
                 </div>
@@ -77,8 +86,9 @@
                     </div>
                 </div>
             @endforelse
-            <div class=" mt-3">
+            <div class=" my-3">
                 {{ $articles->onEachSide(1)->links() }}
+
             </div>
         @endif
     </div>

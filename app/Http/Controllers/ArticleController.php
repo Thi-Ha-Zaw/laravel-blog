@@ -9,6 +9,7 @@ use Illuminate\Contracts\Database\Eloquent\Builder;
 // use Illuminate\Auth\Access\Gate;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 class ArticleController extends Controller
@@ -53,12 +54,22 @@ class ArticleController extends Controller
     {
 
         // return $request;
+        $savedThumbnail = null;
+        if($request->hasFile('thumbnail')){
+            // dd($request->file('thumbnail')->extension());
+            $savedThumbnail = $request->file("thumbnail")->store("public/thumbnail");
+            // $thumbnail = $request->file("thumbnail");
+            // $savedThumbnail = $thumbnail->storeAs("public","hello.".$thumbnail->extension());
+            // $request->thumbnail;
+            // return $savedThumbnail;
+        }
 
         $article = Article::create([
             "title" => $request->title,
             "slug" => Str::slug($request->title),
             "description" => $request->description,
             "excert" => Str::words($request->description, 50, '...'),
+            "thumbnail" => $savedThumbnail,
             "category_id" => $request->category,
             "user_id" => Auth::id()
         ]);
@@ -79,6 +90,8 @@ class ArticleController extends Controller
     public function edit(Article $article)
     {
         Gate::authorize('update', $article);
+
+
         return view("article.edit", compact('article'));
     }
 
@@ -90,12 +103,21 @@ class ArticleController extends Controller
 
         Gate::authorize('update', $article);
 
+        $savedThumbnail = $article->thumbnail;
+        if($request->hasFile('thumbnail')){
+            Storage::delete($article->thumbnail);
+
+            $savedThumbnail = $request->file("thumbnail")->store("public/thumbnail");
+
+        }
+
         $article->update([
             "title" => $request->title,
             "category_id" => $request->category,
             "slug" => Str::slug($request->title),
             "description" => $request->description,
-            "excert" => Str::words($request->description, 50, '...')
+            "excert" => Str::words($request->description, 50, '...'),
+            "thumbnail" => $savedThumbnail
         ]);
 
         return redirect()->route("article.index");

@@ -27,7 +27,7 @@ class PageController extends Controller
             $query->orderBy("name",$sortKey);
         })
         ->latest("id")
-        ->paginate(10)->withQueryString();
+        ->paginate(12)->withQueryString();
 
         return view("welcome",compact("articles"));
     }
@@ -54,7 +54,7 @@ class PageController extends Controller
                 });
             })
             ->latest("id")
-            ->paginate(10)->withQueryString()
+            ->paginate(12)->withQueryString()
         ]);
 
 

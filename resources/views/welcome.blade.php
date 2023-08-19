@@ -1,14 +1,13 @@
 @extends('layouts.master')
 
 @section('content')
-
     @include('layouts.category-nav')
 
     <div class="row mt-5">
         @forelse ($articles as $article)
             <div class="col-lg-4 col-md-6 col-12">
                 <div class="card slide-down  border-0 shadow p-3 mb-3 blog-card">
-                    <div class="card-body d-flex flex-column">
+                    <div class="card-body p-0 d-flex flex-column">
                         <h3 class=" mb-2">
                             <a href="{{ route('detail', $article->slug) }}"
                                 class=" text-decoration-none d-block text-dark text-truncate">{{ $article->title }}</a>
@@ -21,7 +20,15 @@
                                 <img src="{{ asset('images/bluemark.png') }}" alt="" height="20px">
                             @endif
                         </div>
-                        <p class=" text-black-50">{{ $article->excert }}</p>
+                        {{-- <p class=" text-black-50">{{ $article->excert }}</p> --}}
+                        @if ($article->thumbnail)
+                            <img class=" rounded list-thumbnail" src="{{ asset(Storage::url($article->thumbnail)) }}"
+                                alt="">
+                        @else
+                            <img class=" rounded list-thumbnail "
+                                src="https://raw.githubusercontent.com/julien-gargot/images-placeholder/master/placeholder-square.png"
+                                alt="">
+                        @endif
                         <a href="{{ route('detail', $article->slug) }}" class=" btn btn-dark px-4 py-1 mt-2 mt-auto">See
                             More</a>
                     </div>
@@ -41,4 +48,4 @@
     </div>
 @endsection
 
-@vite(['resources/js/swiper.js','resources/js/scrollAnimate.js'])
+@vite(['resources/js/swiper.js', 'resources/js/scrollAnimate.js'])

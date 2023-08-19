@@ -3,7 +3,7 @@
 @section('content')
     <div class="">
         <h3 class=" mb-2">
-            <a href="" class=" text-decoration-none text-dark">{{ $article->title }}</a>
+            {{ $article->title }}
         </h3>
         <div class=" mb-4">
             <span class=" badge bg-black">{{ $article->category->title ?? 'Unknown' }}</span>
@@ -11,6 +11,16 @@
             <span class=" badge bg-black">{{ $article->user?->name }}</span>
             @if ($article->user->role == 'admin')
                 <img src="{{ asset('images/bluemark.png') }}" alt="" height="20px">
+            @endif
+        </div>
+        <div class=" my-3">
+            @if ($article->thumbnail)
+                <img class=" rounded detail-thumbnail" src="{{ asset(Storage::url($article->thumbnail)) }}"
+                    alt="">
+            @else
+                <img class=" rounded detail-thumbnail "
+                    src="https://raw.githubusercontent.com/julien-gargot/images-placeholder/master/placeholder-square.png"
+                    alt="">
             @endif
         </div>
         <p class=" text-black-50" style="word-wrap: break-word">{{ $article->description }}</p>

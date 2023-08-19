@@ -54,28 +54,39 @@
     <div class=" col-12">
         <div class="swiper mySwiper slide-down">
             <div class="swiper-wrapper">
+                @foreach (App\Models\Article::latest("id")->limit(11)->get() as $article)
+
+
                 <div class="swiper-slide ">
                     {{-- Latest Articles Card --}}
-                    <div class=" latestArticle">
-                        <div class="">
-                            <img src="https://img.thedailybeast.com/image/upload/c_crop,d_placeholder_euli9k,h_630,w_1120,x_47,y_0/dpr_2.0/c_limit,w_740/fl_lossy,q_auto/v1685994244/apple-vision-pro__cctkg4nhnb7m_og_jdabth"
-                                alt="" class=" w-100 rounded-2">
-                        </div>
-                        <div class="latestArticle-detail rounded-2">
-                            <div class=" latestArticle-category p-3">
-                                <h4 class=" badge badge-dark">Food</h4>
+                    <a href="{{route("detail",$article->slug)}}">
+                        <div class=" latestArticle">
+                            <div class="">
+                               @if ($article->thumbnail)
+                               <img src="{{asset(Storage::url($article->thumbnail))}}"
+                               alt="" class=" w-100 rounded-2">
+
+                               @else
+                               <img src="https://raw.githubusercontent.com/julien-gargot/images-placeholder/master/placeholder-square.png"
+                               alt="" class=" w-100 rounded-2">
+
+                               @endif
                             </div>
-                            <div class=" latestArticle-text p-3">
-                                <h5 class=" text-white mb-1">Apple Vision Pro is released now</h5>
-                                <p class=" text-white-50 small">Lorem ipsum, dolor sit amet consectetur adipisicing
-                                    nemo, totam facere velit vitae ipsa aperiam nisi earum excepturi omnis quibusdam
-                                    dicta!</p>
+                            <div class="latestArticle-detail rounded-2">
+                                <div class=" latestArticle-category p-3">
+                                    <h4 class=" badge badge-dark">{{$article->category->title}}</h4>
+                                </div>
+                                <div class=" latestArticle-text p-3">
+                                    <h5 class=" text-white mb-1 text-truncate d-inline-block">{{Str::limit($article->title,40,"...")}}</h5>
+                                    <p class=" text-white-50 small">{{Str::limit($article->excert,150,"...")}}</p>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    </a>
 
                 </div>
-                <div class="swiper-slide">
+                @endforeach
+                {{-- <div class="swiper-slide">
                     <div class=" latestArticle">
                         <div class="">
                             <img src="https://img.freepik.com/free-photo/hightech-helmets-humanoid-being-generative-ai_8829-2879.jpg?w=740&t=st=1689350936~exp=1689351536~hmac=9357bd10d90442f5d583cb9833122532c78ab62e82ac5ce09b9286ea887a2d32"
@@ -264,11 +275,15 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> --}}
             </div>
             <div class="swiper-pagination d-none"></div>
         </div>
     </div>
+</div>
+
+<div>
+
 </div>
 
 @vite(['resources/js/swiper.js','resources/js/scrollAnimate.js'])

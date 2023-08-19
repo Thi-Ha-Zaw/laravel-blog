@@ -166,6 +166,7 @@
     background: #fff;
     box-shadow: 0px 15px 50px rgba(0, 0, 0, 0.2);
     filter: blur(2px);
+    overflow: hidden;
 }
 
 
@@ -202,6 +203,7 @@
         top: 0;
         opacity: 1;
         transition: 0.4s ease-in-out;
+
     }
 
     .latestArticle-category{
@@ -212,6 +214,7 @@
     .latestArticle-text{
         position: absolute;
         bottom: 0 ;
+        
 
     }
 
@@ -232,7 +235,7 @@
 //blog card ui
 
 .blog-card{
-    height: 350px;
+    height: 380px;
 }
 
 @include media-breakpoint-down(lg) {
@@ -316,21 +319,37 @@
     /* text-shadow: 0 0 5px #ffffff, 0 0 20px #000, 0 0 30px #000; */
 }
 
-// .hero{
-//     // position: absolute;
-//     // top: 50%;
-//     // left: 50%;
-//     // transform: translate(-50%, -50%)
-
-//     // flex-direction: column;
-// }
-
 
 #appAnimate canvas {
     display: block;
     position: fixed;
     z-index: -1;
     top: 0;
+}
+
+//for uploading image UI
+
+.list-thumbnail{
+    width: auto;
+    height: 220px;
+    object-fit: cover;
+}
+
+.detail-thumbnail{
+    width: 400px;
+    height: 300px;
+    object-fit: cover;
+}
+
+.single-photo-update{
+    height: 250px;
+    background-size: auto 220px;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.upload-logo:nth-child(2){
+    display: none;
 }
 
 
