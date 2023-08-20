@@ -15,7 +15,7 @@
                     <div class="row align-items-center g-5">
 
                         {{-- for uploading title,category,description UI --}}
-                        <div class="col-8">
+                        <div class=" col-lg-8">
                             <div class=" mb-3">
                                 <label for="" class=" form-label fs-5">Title</label>
                                 <input type="text" class=" form-control @error('title') is-invalid @enderror" name="title"
@@ -47,7 +47,7 @@
                                 @enderror
                             </div>
                         </div>
-                        <div class="col-4">
+                        <div class=" col-lg-4">
                             <div class="mb-3">
                                 <label class=" form-label" for="">Thumbnail</label>
                                 <div
@@ -62,6 +62,19 @@
                                     class=" real-upload d-none form-control @error('thumbnail') is-invalid @enderror"
                                     name="thumbnail">
                                 @error('thumbnail')
+                                    <p class=" text-danger">{{ $message }}</p>
+                                @enderror
+                            </div>
+                            <div class="mb-3">
+                                <label class=" form-label" for="">Photos</label>
+
+
+                                <input form="createArticle" type="file" accept="image/jpeg,image/png"
+                                    class=" form-control @error('photos') is-invalid @enderror" name="photos[]" multiple>
+                                @error('photos')
+                                    <p class=" text-danger">{{ $message }}</p>
+                                @enderror
+                                @error('photos.*')
                                     <p class=" text-danger">{{ $message }}</p>
                                 @enderror
                             </div>

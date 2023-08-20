@@ -23,7 +23,7 @@
     </style>
 
     <!-- Scripts -->
-    @vite(['resources/sass/app.scss', 'resources/js/app.js', 'resources/js/comment.js'])
+    @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 </head>
 
 <body>
@@ -46,7 +46,7 @@
 
         <div class=" container">
             <div class="row justify-content-center">
-                <div class="col-12 mt-3 mt-lg-4">
+                <div class="col-12  mt-3 mt-lg-4">
                     <main class="pb-4 ">
                         @yield('content')
                     </main>

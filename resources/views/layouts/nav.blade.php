@@ -31,31 +31,6 @@
                     <a class="nav-link" href="{{ route('article.index') }}">Dashboard</a>
                 </li>
 
-                    {{-- @can('viewAny', App\Models\Category::class)
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('category.create') }}">Create Category</a>
-                        </li>
-
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('category.index') }}">Category Lists</a>
-                        </li>
-                    @endcan --}}
-
-                    {{-- <li class="nav-item">
-                        <a class="nav-link" href="{{ route('article.create') }}">Create Article</a>
-                    </li> --}}
-
-                    {{-- @can("admin-only")
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('users') }}">Users</a>
-                        </li>
-                    @endcan
-
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('article.index') }}">Article lists</a>
-                    </li> --}}
-
-
                 @endauth
 
                 @guest

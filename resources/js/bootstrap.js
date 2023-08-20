@@ -50,15 +50,15 @@ window.Echo = new Echo({
 
 //loader
 
-export let loader = document.getElementById('loader');
+export let loader = document.getElementById("loader");
 
-window.addEventListener('load', function () {
-    console.log("Hello finish")
+window.addEventListener("load", function () {
+    console.log("Hello finish");
     loader.style.display = "none";
-})
+});
 
 const commentsContainer = document.getElementById("comments-container");
-const emptyCommentState = document.getElementById('emptyreply');
+const emptyCommentState = document.getElementById("emptyreply");
 
 window.Echo.channel(`comments`).listen(
     ".App\\Events\\NewCommentPosted",
@@ -67,9 +67,9 @@ window.Echo.channel(`comments`).listen(
 
         if (event.comment) {
             handleNewComment(event.comment);
-            emptyCommentState.classList.add('d-none');
+            emptyCommentState.classList.add("d-none");
         } else {
-            emptyCommentState.classList.remove('d-none');
+            emptyCommentState.classList.remove("d-none");
         }
     }
 );
@@ -79,13 +79,13 @@ window.Echo.channel(`comments`).listen(
 window.Echo.channel("comments").listen(
     ".App\\Events\\CommentDeleted",
     (event) => {
-
-
         const commentId = event.commentId;
         const commentElement = document.getElementById(`comment-${commentId}`);
         if (commentElement) {
             commentElement.remove();
-            event.comment?.length == 0 ? emptyCommentState.classList.remove('d-none') : null;
+            event.comment?.length == 0
+                ? emptyCommentState.classList.remove("d-none")
+                : null;
         }
     }
 );
@@ -233,7 +233,6 @@ function createCommentCard(comment) {
     cardBody.appendChild(userBadge);
     const timeBadge = document.createElement("span");
     timeBadge.classList.add("badge", "bg-black", "ms-1");
-    // const createdAt = new Date();
     const createdDate = diffForHumans(comment.created_at);
     timeBadge.innerHTML = `<i class="bi bi-clock"></i> ${createdDate}`;
     cardBody.appendChild(timeBadge);
@@ -329,14 +328,7 @@ function createCommentCard(comment) {
 
     const repliesContainer = document.createElement("div");
     repliesContainer.classList.add("replies-container");
-    // if (comment.replies?.length > 0) {
-    //     console.log("reply");
-    //     // Create and append each reply to the replies container
-    //     comment.replies.forEach((reply) => {
-    //         const replyCard = createReplyCard(reply);
-    //         repliesContainer.appendChild(replyCard);
-    //     });
-    // }
+
     cardBody.appendChild(repliesContainer);
 
     // ... Add code to handle replies ...
@@ -345,42 +337,6 @@ function createCommentCard(comment) {
     return card;
 }
 
-// function createReplyCard(reply) {
-//     console.log(reply);
-//     const replyCard = document.createElement("div");
-//     replyCard.classList.add("card", "mt-2", "ms-4");
-//     const replyCardBody = document.createElement("div");
-//     replyCardBody.classList.add("card-body");
-
-//     // Construct the reply HTML content
-//     const replyContentDiv = document.createElement("div");
-//     const replyContentIcon = document.createElement("i");
-//     replyContentIcon.classList.add("bi", "bi-reply", "me-2");
-//     replyContentDiv.appendChild(replyContentIcon);
-//     const replyContentSpan = document.createElement("span");
-//     replyContentSpan.textContent = reply.content;
-//     replyContentDiv.appendChild(replyContentSpan);
-//     replyCardBody.appendChild(replyContentDiv);
-
-//     // Add the user information and timestamp for the reply
-//     const replyUserBadge = document.createElement("span");
-//     replyUserBadge.classList.add("badge", "bg-black");
-//     replyUserBadge.innerHTML = `<i class="bi bi-person"></i> ${reply.user?.name}`;
-//     replyCardBody.appendChild(replyUserBadge);
-//     const replyTimeBadge = document.createElement("span");
-//     replyTimeBadge.classList.add("badge", "bg-black");
-//     const replyCreatedAt = diffForHumans(reply.created_at);
-//     replyTimeBadge.innerHTML = `<i class="bi bi-clock"></i> ${replyCreatedAt}`;
-//     replyCardBody.appendChild(replyTimeBadge);
-
-//     // Add delete button if the user can delete the reply
-//     // if (reply.can_delete) {
-//     //     ... your existing code for the delete button ...
-//     // }
-
-//     replyCard.appendChild(replyCardBody);
-//     return replyCard;
-// }
 
 // ... Your existing code ...
 

@@ -2,7 +2,7 @@
 
 @section('content')
 
-        <div class="row justify-content-center bg-white shadow p-5 rounded mx-2 mt-5">
+        <div class="row justify-content-center bg-white shadow p-md-5 p-2 rounded mx-md-2 mt-5">
             <div class="col-12">
                 {{-- <h1 class=" mb-4">Category Lists</h1> --}}
                 {{-- <a href="{{ route('category.create') }}" class=" btn btn-dark mb-4">Create</a> --}}

@@ -1,13 +1,4 @@
 
-// document.addEventListener('DOMContentLoaded', function () {
-// const replyBtnPr = document.querySelectorAll(".reply-btn");
-
-// replyBtnPr.forEach(btn => {
-//     btn.addEventListener("click", function () {
-//         btn.nextElementSibling.classList.toggle("d-none");
-//     })
-// })
-// })
 const commentForm = document.getElementById("comment-form");
 
 commentForm.addEventListener("submit", (e) => {

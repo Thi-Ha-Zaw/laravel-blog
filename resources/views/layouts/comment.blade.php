@@ -87,4 +87,4 @@
     @endforelse
 </div>
 
-@vite(['resources/js/reply.js'])
+@vite(['resources/js/reply.js','resources/js/comment.js'])

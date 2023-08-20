@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Article;
 use App\Http\Requests\StoreArticleRequest;
 use App\Http\Requests\UpdateArticleRequest;
+use App\Models\Photo;
 use Illuminate\Contracts\Database\Eloquent\Builder;
 // use Illuminate\Auth\Access\Gate;
 use Illuminate\Support\Facades\Auth;
@@ -34,7 +35,7 @@ class ArticleController extends Controller
                 $query->orderBy("name", $sortKey);
             })
             ->latest("id")
-            ->paginate(7)->withQueryString();
+            ->paginate(12)->withQueryString();
 
         return view("article.index", compact("articles"));
     }
@@ -73,6 +74,22 @@ class ArticleController extends Controller
             "category_id" => $request->category,
             "user_id" => Auth::id()
         ]);
+
+        if($request->hasFile('photos')){
+            $photos = $request->file('photos');
+            $savedPhotos = [];
+            foreach($photos as $photo){
+                $savedPhoto = $photo->store("public/photo");
+                $savedPhotos[] = [
+                    "article_id" => $article->id,
+                    "address"=> $savedPhoto,
+                    "created_at" => now(),
+                    "updated_at" => now()
+
+                ];
+            }
+            Photo::insert($savedPhotos);
+        }
         return redirect()->route("article.index")->with("message", $article->title . "is created");
     }
 

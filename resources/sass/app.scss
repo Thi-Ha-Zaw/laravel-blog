@@ -14,11 +14,15 @@
 @import "mdb-ui-kit/css/mdb.min.css";
 
 
+
 //animate css
 @import "animate.css/animate.css";
 
 //swiper
 @import "../../node_modules/swiper/swiper-bundle.min.css";
+
+//glider carousel
+@import "../../node_modules/glider-js/glider.min.css";
 
 
 //for loading
@@ -140,7 +144,7 @@
     border-color: black;
 }
 
-//swiper
+//swiper slide UI in the laterest article
 
 .swiper {
     width: 100%;
@@ -214,7 +218,7 @@
     .latestArticle-text{
         position: absolute;
         bottom: 0 ;
-        
+
 
     }
 
@@ -231,6 +235,7 @@
     }
 
 }
+
 
 //blog card ui
 
@@ -351,6 +356,38 @@
 .upload-logo:nth-child(2){
     display: none;
 }
+
+.article-img{
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+}
+
+@include media-breakpoint-down(md) {
+    .article-img{
+        width: 90px;
+        height: 100px;
+        object-fit: cover;
+    }
+
+}
+
+
+//glider carousel in detail page
+
+.glider-img{
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    // width: auto;
+    height: 450px !important;
+    object-fit: cover;
+}
+
+@include media-breakpoint-down(md) {
+    .glider-img{
+        height: 250px !important;
+    }
+}
+
 
 
 
