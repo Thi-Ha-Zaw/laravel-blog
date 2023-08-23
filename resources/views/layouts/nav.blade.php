@@ -23,9 +23,9 @@
 
                 {{-- for authenticated users --}}
                 @auth
-                <li class="nav-item">
+                {{-- <li class="nav-item">
                     <a class="nav-link" href="{{ route('index') }}">Home</a>
-                </li>
+                </li> --}}
 
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('article.index') }}">Dashboard</a>

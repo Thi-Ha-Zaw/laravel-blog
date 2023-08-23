@@ -24,6 +24,8 @@ realUpload.addEventListener("change",(event) => {
     singleUploadDiv.style.backgroundImage = null;
 
     img.style.height = 180 + "px";
+    img.style.width = 250 + "px";
+    img.style.objectFit = "contain";
 
     div.classList.add("d-flex","flex-column");
     delButton.innerHTML = `<i class=' bi bi-trash'></i>`;

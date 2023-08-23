@@ -27,9 +27,12 @@
                                 class=" text-decoration-none text-dark">{{ $article->title }}</a>
                         </h3>
                         <div class=" mb-4">
-                            <span class=" badge bg-black">{{ $article->user?->name }}</span>
                             <span class=" badge bg-black">{{ $article->category->title ?? 'Unknown' }}</span>
                             <span class=" badge bg-black">{{ $article->created_at->format('d M Y') }}</span>
+                            <span class=" badge bg-black">{{ $article->user?->name }}</span>
+                            @if ($article->user->role == 'admin')
+                                <img src="{{ asset('images/bluemark.png') }}" alt="" height="20px">
+                            @endif
                         </div>
                         {{-- <p class=" text-black-50">{{ $article->excert }}</p> --}}
                         @if ($article->thumbnail)

@@ -6,33 +6,34 @@
     <div class="row mt-5">
         @forelse ($articles as $article)
             <div class="col-lg-4 col-md-6 col-12">
-                <div class="card slide-down  border-0 shadow p-3 mb-3 blog-card">
-                    <div class="card-body p-0 d-flex flex-column">
-                        <h3 class=" mb-2">
-                            <a href="{{ route('detail', $article->slug) }}"
-                                class=" text-decoration-none d-block text-dark text-truncate">{{ $article->title }}</a>
-                        </h3>
-                        <div class=" mb-4">
-                            <span class=" badge bg-black">{{ $article->category->title ?? 'Unknown' }}</span>
-                            <span class=" badge bg-black">{{ $article->created_at->format('d M Y') }}</span>
-                            <span class=" badge bg-black">{{ $article->user?->name }}</span>
-                            @if ($article->user->role == 'admin')
-                                <img src="{{ asset('images/bluemark.png') }}" alt="" height="20px">
+                <a href="{{ route('detail', $article->slug) }}" class=" text-decoration-none text-dark">
+                    <div class="card slide-down  border-0 shadow p-3 mb-3 blog-card">
+                        <div class="card-body p-0 d-flex flex-column">
+                            <h3 class=" mb-2 text-truncate">
+                                {{ $article->title }}
+                            </h3>
+                            <div class=" mb-4">
+                                <span class=" badge bg-black">{{ $article->category->title ?? 'Unknown' }}</span>
+                                <span class=" badge bg-black">{{ $article->created_at->format('d M Y') }}</span>
+                                <span class=" badge bg-black">{{ $article->user?->name }}</span>
+                                @if ($article->user->role == 'admin')
+                                    <img src="{{ asset('images/bluemark.png') }}" alt="" height="20px">
+                                @endif
+                            </div>
+                            {{-- <p class=" text-black-50">{{ $article->excert }}</p> --}}
+                            @if ($article->thumbnail)
+                                <img class=" rounded list-thumbnail" src="{{ asset(Storage::url($article->thumbnail)) }}"
+                                    alt="">
+                            @else
+                                <img class=" rounded list-thumbnail "
+                                    src="https://raw.githubusercontent.com/julien-gargot/images-placeholder/master/placeholder-square.png"
+                                    alt="">
                             @endif
+                            <a href="{{ route('detail', $article->slug) }}" class=" btn btn-dark px-4 py-1 mt-2 mt-auto">See
+                                More</a>
                         </div>
-                        {{-- <p class=" text-black-50">{{ $article->excert }}</p> --}}
-                        @if ($article->thumbnail)
-                            <img class=" rounded list-thumbnail" src="{{ asset(Storage::url($article->thumbnail)) }}"
-                                alt="">
-                        @else
-                            <img class=" rounded list-thumbnail "
-                                src="https://raw.githubusercontent.com/julien-gargot/images-placeholder/master/placeholder-square.png"
-                                alt="">
-                        @endif
-                        <a href="{{ route('detail', $article->slug) }}" class=" btn btn-dark px-4 py-1 mt-2 mt-auto">See
-                            More</a>
                     </div>
-                </div>
+                </a>
             </div>
         @empty
             <div class=" justify-content-center d-flex mt-5">
