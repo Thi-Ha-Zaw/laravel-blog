@@ -1,7 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-
     {{-- login --}}
 
     <section class="vh-100">
@@ -75,10 +74,7 @@
 
                                         <p class="mb-5 pb-lg-2" style="color: #393f81;">Don't have an account? <a
                                                 href="{{ route('register') }}" style="color: #393f81;">Register here</a></p>
-                                        <a href="#!" class="small text-muted">Terms of use.</a>
-                                        <a href="#!" class="small text-muted">Privacy policy</a>
                                     </form>
-
                                 </div>
                             </div>
                         </div>
