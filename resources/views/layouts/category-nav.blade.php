@@ -11,7 +11,7 @@
                 @foreach (App\Models\Category::all() as $category)
                     <a href="{{ route('categorized', ['slug' => $category->slug, 'category-slug' => $category->slug]) }}"
                         class=" btn  {{ request('category-slug') === $category->slug ? 'btn-dark' : 'btn-outline-dark' }} btn-sm ">
-                        {{ $category->title ?? 'Unknown' }}
+                        {{ $category->title}}
                     </a>
                 @endforeach
             </div>
