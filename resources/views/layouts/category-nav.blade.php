@@ -11,7 +11,7 @@
                 @foreach (App\Models\Category::all() as $category)
                     <a href="{{ route('categorized', ['slug' => $category->slug, 'category-slug' => $category->slug]) }}"
                         class=" btn  {{ request('category-slug') === $category->slug ? 'btn-dark' : 'btn-outline-dark' }} btn-sm ">
-                        {{ $category->title }}
+                        {{ $category->title ?? 'Unknown' }}
                     </a>
                 @endforeach
             </div>
@@ -63,7 +63,7 @@
                             </div>
                             <div class="latestArticle-detail rounded-2">
                                 <div class=" latestArticle-category p-3">
-                                    <h4 class=" badge badge-dark">{{$article->category->title}}</h4>
+                                    <h4 class=" badge badge-dark">{{$article->category->title ?? 'Unknown'}}</h4>
                                 </div>
                                 <div class=" latestArticle-text p-3">
                                     <h5 class=" text-white mb-1 text-truncate d-inline-block">{{Str::limit($article->title,40,"...")}}</h5>
